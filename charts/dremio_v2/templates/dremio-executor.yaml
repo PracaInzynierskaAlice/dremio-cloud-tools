@@ -81,16 +81,16 @@ spec:
           name: server-conduit
       initContainers:
       {{- include "dremio.executor.extraInitContainers" (list $ $engineName) | nindent 6 }}
-      - name: chown-data-directory
-        image: {{ $.Values.image }}:{{ $.Values.imageTag }}
-        imagePullPolicy: IfNotPresent
-        securityContext:
-          runAsUser: 0
-        volumeMounts:
-        - name: {{ template "dremio.executor.volumeClaimName" (list $ $engineName) }}
-          mountPath: /opt/dremio/data
-        command: ["chown"]
-        args: ["dremio:dremio", "/opt/dremio/data"]
+{{/*      - name: chown-data-directory*/}}
+{{/*        image: {{ $.Values.image }}:{{ $.Values.imageTag }}*/}}
+{{/*        imagePullPolicy: IfNotPresent*/}}
+{{/*        securityContext:*/}}
+{{/*          runAsUser: 0*/}}
+{{/*        volumeMounts:*/}}
+{{/*        - name: {{ template "dremio.executor.volumeClaimName" (list $ $engineName) }}*/}}
+{{/*          mountPath: /opt/dremio/data*/}}
+{{/*        command: ["chown"]*/}}
+{{/*        args: ["dremio:dremio", "/opt/dremio/data"]*/}}
       {{- include "dremio.executor.cloudCache.initContainers" (list $ $engineName) | nindent 6 }}
       - name: wait-for-zookeeper
         image: busybox
